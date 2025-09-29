@@ -138,7 +138,7 @@ int decodePollAnswer(int which)
          Inv_Data[which].dcc[1] =  extractValue(64, 4, 1, 0, s_d ) * 0.0125;
       } else {
          
-        //yc600 or QS1
+        //yc600 or QS1 or QT2
         //frequency ac voltage and temperature
         Inv_Data[which].acv = extractValue(56, 4, 1, 0, s_d) * ((float)1 / (float)1.3277) / 4 ;
         
@@ -164,9 +164,9 @@ int decodePollAnswer(int which)
 
 
         //********************************************************************************************
-        //                                     SQ1
+        //                                     QS1 and QT2
         //********************************************************************************************
-        if(Inv_Prop[which].invType == 1) //SQ1 inverter
+        if(Inv_Prop[which].invType == 1 or Inv_Prop[which].invType == 3) //QS1 or QT2 inverter
         {
           //offset 21 -> byte for voltage ch3
           Inv_Data[which].dcv[2] = (extractValue( 42, 2, (float)16, 0, s_d ) + extractValue(40, 1, 1, 0, s_d)) * (float)82.5 / (float)4096;
@@ -205,6 +205,9 @@ We keep stacking the increases so we have also en_inc_total
          break;
        case 2: //ds3 offset 38
          t_extr = (int)extractValue(76, 4, 1, 0, s_d); // dataframe timestamp ds3
+         break;
+      case 3: //qt2
+         t_extr = extractValue(60, 4, 1, 0, s_d); // dataframe timestamp
          break;
     }
     
@@ -360,7 +363,7 @@ if(Mqtt_Format == 0) return;
    case 3:
        snprintf(toMQTT, sizeof(toMQTT), "{\"invnr\":\"%d\",\"freq\":%.1f,\"temp\":%.1f,\"acv\":%.1f,\"signal\":%.1f,\"polled\":%d" , which, Inv_Data[which].freq, Inv_Data[which].heath, Inv_Data[which].acv, Inv_Data[which].sigQ, polled[which]);
        //char pan[50]={0};
-       if( Inv_Prop[which].invType == 1 ) { // qs1
+       if( Inv_Prop[which].invType == 1 or Inv_Prop[which].invType == 3) { // qs1 or qt2
            sprintf(pan, ",\"dcv\":[%.1f,%.1f,%.1f,%.1f]", Inv_Data[which].dcv[0], Inv_Data[which].dcv[1],Inv_Data[which].dcv[2],Inv_Data[which].dcv[3]);
            strcat(toMQTT, pan);
            sprintf(pan, ",\"dcc\":[%.1f,%.1f,%.1f,%.1f]", Inv_Data[which].dcc[0], Inv_Data[which].dcc[1],Inv_Data[which].dcc[2],Inv_Data[which].dcc[3]);
@@ -396,7 +399,7 @@ if(Mqtt_Format == 0) return;
         sprintf(pan, ",\"ch1\":[%.1f,%.1f,%.1f,%.2f]", Inv_Data[which].dcv[1], Inv_Data[which].dcc[1], Inv_Data[which].power[1], en_saved[which][1]);  
         strcat(toMQTT, pan);
 
-        if( Inv_Prop[which].invType == 1 ) { // add ch2 and ch3
+        if( Inv_Prop[which].invType == 1 or Inv_Prop[which].invType == 3) { // add ch2 and ch3
             sprintf(pan, ",\"ch2\":[%.1f,%.1f,%.1f,%.2f]", Inv_Data[which].dcv[2], Inv_Data[which].dcc[2], Inv_Data[which].power[2], en_saved[which][2]);  
             strcat(toMQTT, pan);
             sprintf(pan, ",\"ch3\":[%.1f,%.1f,%.1f,%.2f]", Inv_Data[which].dcv[3], Inv_Data[which].dcc[3], Inv_Data[which].power[3], en_saved[which][3]);  

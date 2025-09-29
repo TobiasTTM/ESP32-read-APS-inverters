@@ -88,6 +88,7 @@ window.location.href='/MENU';
     <tr><td class="cap">TYPE<td><select name='invt' class='sb1' id='sel' onchange='myFunction()'>
     <option value='0' invtype_0>YC600</option>
     <option value='2' invtype_2>DS3</option>
+    <option value='3' invtype_3>QT2</option>
     <option value='1' invtype_1>QS1</option></select>
     </tr>
     <tr><td class="cap" >NAME<td class="cap" ><input class='inp4' id='il' name='il' maxlength='12' value='{location}'></input>
@@ -121,7 +122,7 @@ function hideFunction() {
 }
 
 function myFunction(){
- if(document.getElementById("sel").value == 1 ) { 
+ if(document.getElementById("sel").value == 1 || document.getElementById("sel").value == 3) { 
     showFunction();
  } else {
    hideFunction();
@@ -149,7 +150,7 @@ void handleInverterconfig(AsyncWebServerRequest *request)
   // collect the serverarguments
    strcpy(Inv_Prop[iKeuze].invLocation, request->arg("il").c_str());
    strcpy(Inv_Prop[iKeuze].invSerial, request->arg("iv").c_str());
-   Inv_Prop[iKeuze].invType = request->arg("invt").toInt(); //values are 0 1 2  
+   Inv_Prop[iKeuze].invType = request->arg("invt").toInt(); //values are 0 1 2 3 
    Inv_Prop[iKeuze].invIdx = request->arg("mqidx").toInt(); //values are 0 1  
    Inv_Prop[iKeuze].calib = request->arg("tc").toInt(); //values are 0 1
 // the selectboxes
@@ -159,10 +160,10 @@ void handleInverterconfig(AsyncWebServerRequest *request)
 
    Inv_Prop[iKeuze].conPanels[2] = false;
    Inv_Prop[iKeuze].conPanels[3] = false;
-   //we only collect this when type = 1
-   if(Inv_Prop[iKeuze].invType == 1) {
-   if(request->hasParam("pan3")) { Inv_Prop[iKeuze].conPanels[2] = true;}    
-   if(request->hasParam("pan4")) { Inv_Prop[iKeuze].conPanels[3] = true;}    
+   //we only collect this when type = 1 or 3
+   if(Inv_Prop[iKeuze].invType == 1 || Inv_Prop[iKeuze].invType == 3) {
+    if(request->hasParam("pan3")) { Inv_Prop[iKeuze].conPanels[2] = true;}    
+    if(request->hasParam("pan4")) { Inv_Prop[iKeuze].conPanels[3] = true;}    
    }
    //DebugPrintln("checked panels are : " + String(Inv_Prop[iKeuze].conPanels[0])+ String(Inv_Prop[iKeuze].conPanels[2])+ String(Inv_Prop[iKeuze].conPanels[2])+ String(Inv_Prop[iKeuze].conPanels[3]));
    //is this a addition?
@@ -312,7 +313,7 @@ String processor(const String& var)
   if(var == "LOADBAG") 
   {
     consoleOut(F("found LOADBAG"));
-    if(Inv_Prop[iKeuze].invType == 1) 
+    if(Inv_Prop[iKeuze].invType == 1 or Inv_Prop[iKeuze].invType == 3) 
       {
       return F("showFunction()"); 
       } else {
@@ -385,7 +386,7 @@ void inverterForm() {
         if (Inv_Prop[iKeuze].conPanels[0]) { toSend.replace("#1check", "checked");}
         if (Inv_Prop[iKeuze].conPanels[1]) { toSend.replace("#2check", "checked");}
                 
-        if(Inv_Prop[iKeuze].invType != 1 ) { // when the type = yc600 (0) or ds3 (2)
+        if(Inv_Prop[iKeuze].invType == 0 || Inv_Prop[iKeuze].invType == 2 ) { // when the type = yc600 (0) or ds3 (2)
               
             toSend.replace("onload='showFunction()", "onload='hideFunction()" );
             if(Inv_Prop[iKeuze].invType == 0) 
@@ -394,10 +395,14 @@ void inverterForm() {
             } else {
              toSend.replace("invtype_2", "selected");  
            }
-        } else { // inv type == 1 
+        } else { // inv type == 1 or 3
           
           //Serial.println(" inverter type = 1");
-          toSend.replace("invtype_1", "selected");
+          if(Inv_Prop[iKeuze].invType == 1){
+            toSend.replace("invtype_1", "selected");
+          } else {
+            toSend.replace("invtype_3", "selected");
+          }
            if (Inv_Prop[iKeuze].conPanels[2]) { toSend.replace("#3check", "checked");}
            if (Inv_Prop[iKeuze].conPanels[3]) { toSend.replace("#4check", "checked");}
         }
