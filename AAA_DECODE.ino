@@ -93,7 +93,7 @@ int decodePollAnswer(int which)
 //FE0164010064FE034480001401D2FE0345C43A1000A8FE724481000006013A101414007100B57CFA00005E703000021300fbfb5cbbbb20000200e6ffff000000000000000006f506f9002e00340360138a17a70024001fffff054206900016f62b0018e451ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff3969fefe",300);
 // tail starts with serial
 // tail  70 30 00 02 13 00 | fb fb 5c bb bb 20 00 02 00   e6 ff ff 00 00   00 00 00 00 00 00 | 06 f5 | 06 f9 | 00 2e | 00 34 | 03 60 | 13 8a | 17 a7 00 24
-//       0  1  2  3  4  5  | 6  7  8  9  10 11 12 13 14 | 15 16 17 18 19 | 20 21 22 23 24 25 | 26 27 | 28 29 | 30 31 | 32 33 | 34 35 | 36 37 | 38 39 40
+//       0  1  2  3  4  5  | 6  7  8  9  10 11 12 13 14 | 15 16 17 18 19 | 20 21 22 23 24 25 | 26 27 | 28 29 | 30 31 | 32 33 | 34 35 | 36 37 | 38 39 40 41
 //             serial                                                                          dcv2  |  dcv1 |  dcv3 |       |  ACV  | freq  | time
 
 // | 00 1f ff ff 05 42 | 06  90 | 00 16 f6 2b | 00 18 e4 51 | ff ff ff
@@ -101,6 +101,33 @@ int decodePollAnswer(int which)
 // |                   |  temp  |      en2    |       en1
 
 // ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff3969fefe",300);
+
+// a QT2 message
+//FE0164010064FE034480001401D2FE0345C48B1D0014FE0345C48B1D0014FE7D4481000006018B1D1414006000E23413000069901000010817FBFB5CBBBB3000010010FFFF0000000000008000046E00C600B30008000C0010024909240934093F089F079F138BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00069A2400004D76000015500000174BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2CB5FEFE8B1D001D Mains 400V 2A panel 1
+//FE0164010064FE034480001401D2FE0345C48B1D0014FE0345C48B1D0014FE7D4481000006018B1D14140060003C1116000069901000010817FBFB5CBBBB3000010010FFFF0000000000008000047900C600C80009000E0010028509270935092008A007A91388FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0007686800005655000017C200001A01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2D29FEFE8B1D009A Mains 400V 2A panel 1
+//FE0164010064FE034480001401D2FE0345C48B1D0014FE0345C48B1D0014FE7D4481000006018B1D1414004800B43070000069901000010817FBFB5CBBBB3000010010FFFF0000000000008000047600C700C1000B000F001009E7093809120921089F0884138AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0020D24500016DBE000060F100006C54FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2F56FEFE8B1D004D Mains 400V 2A panel 1
+//FE0164010064FE034480001401D2FE0345C48B1D0014FE0345C48B1D0014FE7D4481000006018B1D1414005000303B8E000069901000010817FBFB5CBBBB3000010010FFFF0000000808408202047B00C500050001000200020C5D00110011001207B008AE0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF002834DC0001BF540000753B0000836AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2D05FEFE8B1D0096 Mains 0V 0A panel 1
+//FE0164010064FE034480001401D2FE0345C48B1D0014FE0345C48B1D0014FE7D4481000006018B1D141400550036F493000069901000010817FBFB5CBBBB3000010010FFFF0000000808408202047B00C500040001000200030CD5001200110012068E08A90000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00283D2A0001C10500007569000083D3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2CF7FEFE8B1D003C Mains 0V 0A panel 1
+//FE0164010064FE034480001401D2FE0345C48B1D0014FE0345C48B1D0014FE7D4481000006018B1D1414003400CE5406000069901000010817FBFB5CBBBB3000010010FFFF0000000000008000047B00C50000000200030004273609310925091305A808081385FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF002A0CE60002106E00007F6D00009DF8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2D10FEFE8B1D008F Mains 400V start up
+//FE0164010064FE034480001401D2FE7D4481000006018B1D1414002C00ED5406006169901000010817FBFB5CBBBB3000010010FFFF000000000000A000027E00C4000500010000000103A7090309110924002C07C2138AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00002B750000005B00000117000004B4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2B35FEFE8B1DD8AB Main 400V 0A pannels
+//FE0164010064FE034480001401D2FE7D4481000006018B1D141400480050310900D569901000010817FBFB5CBBBB3000010010FFFF000000000000A000027E00C4000500000003000203E30907090E0926002C07C31388FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00002E42000000700000012A00000503FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2ABEFEFE8B1DD8EB
+//FE0164010064FE034480001401D2FE0345C48B1D0014FE0345C48B1D0014FE0345C48B1D0014FE7D4481000006018B1D1414002E00BECC29000069901000010817FBFB5CBBBB3000010010FFFF0000000000000000047104120318000D02050012182809200930093508A009141388FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF004C2E4A0002934C000D642E000366BEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2B67FEFE8B1D8B43
+//FE0164010064FE034480001401D2FE0345C48B1D0014FE0345C48B1D0014FE7D4481000006018B1D1414004100279572000069901000010817FBFB5CDDDE01FF23E300139214B413EC000A0320005000020301F603200003E8000000000064000960092408CA0898012C0A4B08020BB80E6A140E42000622020D020D0E5708A0FF008BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF256FFEFE8B1DD866
+
+//
+//      90 10 00 01 08 17 | FB FB 5C BB BB 30 00 01 00 | 10 FF FF 00 00 | 00 00 00 00 80 00 | 04 6E | 00 C6 | 00 B3 | 00 08 | 00 0C | 00 10 | 02 49 | 09 24 | 09 34 | 09 3F | 08 9F | 07 9F | 13 8B | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 00 06 9A 24 | 00 00 4D 76 | 00 00 15 50 | 00 00 17 4B | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 2C  B5 | FE FE 8B 1D 00 1D powerd on
+//      90 10 00 01 08 17 | FB FB 5C BB BB 30 00 01 00 | 10 FF FF 00 00 | 00 00 00 00 80 00 | 04 79 | 00 C6 | 00 C8 | 00 09 | 00 0E | 00 10 | 02 85 | 09 27 | 09 35 | 09 20 | 08 A0 | 07 A9 | 13 88 | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 00 07 68 68 | 00 00 56 55 | 00 00 17 C2 | 00 00 1A 01 | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 2D  29 | FE FE 8B 1D 00 9A powerd on
+//      90 10 00 01 08 17 | FB FB 5C BB BB 30 00 01 00 | 10 FF FF 00 00 | 00 00 00 00 80 00 | 04 76 | 00 C7 | 00 C1 | 00 0B | 00 0F | 00 10 | 09 E7 | 09 38 | 09 12 | 09 21 | 08 9F | 08 84 | 13 8A | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 00 20 D2 45 | 00 01 6D BE | 00 00 60 F1 | 00 00 6C 54 | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 2F  56 | FE FE 8B 1D 00 4D powerd on
+//      90 10 00 01 08 17 | FB FB 5C BB BB 30 00 01 00 | 10 FF FF 00 00 | 00 08 08 40 82 02 | 04 7B | 00 C5 | 00 05 | 00 01 | 00 02 | 00 02 | 0C 5D | 00 11 | 00 11 | 00 12 | 07 B0 | 08 AE | 00 00 | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 00 28 34 DC | 00 01 BF 54 | 00 00 75 3B | 00 00 83 6A | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 2D  05 | FE FE 8B 1D 00 96 Mains 0V 0A panel 1
+//      90 10 00 01 08 17 | FB FB 5C BB BB 30 00 01 00 | 10 FF FF 00 00 | 00 08 08 40 82 02 | 04 7B | 00 C5 | 00 04 | 00 01 | 00 02 | 00 03 | 0C D5 | 00 12 | 00 11 | 00 12 | 06 8E | 08 A9 | 00 00 | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 00 28 3D 2A | 00 01 C1 05 | 00 00 75 69 | 00 00 83 D3 | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 2C  F7 | FE FE 8B 1D 00 3C Mains 0V 0A panel 1
+//      90 10 00 01 08 17 | FB FB 5C BB BB 30 00 01 00 | 10 FF FF 00 00 | 00 00 00 00 80 00 | 04 7B | 00 C5 | 00 00 | 00 02 | 00 03 | 00 04 | 27 36 | 09 31 | 09 25 | 09 13 | 05 A8 | 08 08 | 13 85 | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 00 2A 0C E6 | 00 02 10 6E | 00 00 7F 6D | 00 00 9D F8 | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 2D  10 | FE FE 8B 1D 00 8F Mains 400V start up
+//      90 10 00 01 08 17 | FB FB 5C BB BB 30 00 01 00 | 10 FF FF 00 00 | 00 00 00 00 A0 00 | 02 7E | 00 C4 | 00 05 | 00 01 | 00 00 | 00 01 | 03 A7 | 09 03 | 09 11 | 09 24 | 00 2C | 07 C2 | 13 8A | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 00 00 2B 75 | 00 00 00 5B | 00 00 01 17 | 00 00 04 B4 | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 2B  35 | FE FE 8B 1D D8 AB Mains 400V 0A pannels
+//      90 10 00 01 08 17 | FB FB 5C BB BB 30 00 01 00 | 10 FF FF 00 00 | 00 00 00 00 00 00 | 04 71 | 04 12 | 03 18 | 00 0D | 02 05 | 00 12 | 18 28 | 09 20 | 09 30 | 09 35 | 08 A0 | 09 14 | 13 88 | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 00 4C 2E 4A | 00 02 93 4C | 00 0D 64 2E | 00 03 66 BE | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 2B  67 | FE FE 8B 1D 8B 43 Mains 400V Pannel1 43V 10A Pannel2 39V 6A
+//      90 10 00 01 08 17 | FB FB 5C DD DE 01 FF 23 E3 | 00 13 92 14 B4 | 13 EC 00 0A 03 20 | 00 50 | 00 02 | 03 01 | F6 03 | 20 00 | 03 E8 | 00 00 | 00 00 | 00 64 | 00 09 | 60 09 | 24 08 | CA 08 | 98 01 2C 0A 4B 08 02 0B B8 0E 6A 14 0E 42 00 06 22 02 | 0D 02 0D 0E | 57 08 A0 FF | 00 8B FF FF | FF FF FF FF | FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF | 25  6F | FE FE 8B 1D D8 66 Awnser on throtle command
+
+//      0  1  2  3  4  5  | 6  7  8  9  10 11 12 13 14 | 15 16 17 18 19 | 20 21 22 23 24 25 | 26 27 | 28 29 | 30 31 | 32 33 | 34 35 | 36 37 | 38 39 | 40 41 | 42 43 | 44 45 | 46 47 | 48 49 | 50 51 | 52 53 54 55 56 57 50 59 60 61 62 63 64 65 66 67 68 69 | 70 71 72 73 | 74 75 76 77 | 78 79 80 81 | 82 83 84 85 | 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100| 101 102| 
+//             serial                                                   |      status       | dcv1  |  dcv2 |  dci1 |  dci2 |  dci4 |  dci4 |  val2 |  acv1 |  acv2 |  acv3 | val3  |  temp |  freq |                                                       |    val4     |     val5    | day counter |sec from boot|                                              |  val8  | 
+
 
 // new string
 // 703000021300fbfb5cbbbb2000fc0001ffff000000000000000006e506ee015901da036e13882bbb01480026 ff ff 05 25 | 08 43 | 00 3a 40 b2 | 00 35 38 52 | 00 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff3896fefe
@@ -115,8 +142,8 @@ int decodePollAnswer(int which)
       { // is this a DS3
         consoleOut( "decoding a DS3 inverter");
         // ACV offset 34
-        Inv_Data[which].acv = extractValue(68, 4, 1, 0, s_d) / 3.8 ;
-        consoleOut( "extracted ACV = " + String(Inv_Data[which].acv) );
+        Inv_Data[which].acv[0] = extractValue(68, 4, 1, 0, s_d) / 3.8 ;
+        consoleOut( "extracted ACV = " + String(Inv_Data[which].acv[0]) );
         
         // FREQ offset 36
         Inv_Data[which].freq = extractValue(72, 4, 1, 0, s_d)/100;
@@ -136,11 +163,90 @@ int decodePollAnswer(int which)
          Inv_Data[which].dcc[0] =  extractValue(60, 4, 1, 0, s_d ) * 0.0125;
          // current ch1 offset 34
          Inv_Data[which].dcc[1] =  extractValue(64, 4, 1, 0, s_d ) * 0.0125;
+      } 
+      else if( Inv_Prop[which].invType == 3 ) 
+      { // is this a QT2
+        consoleOut( "decoding a QT2 inverter");
+        // ACV offset 40
+        Inv_Data[which].acv[0] = extractValue(80, 4, 1, 0, s_d) / 10.0 ;
+        consoleOut( "extracted ACV0 = " + String(Inv_Data[which].acv[0]) + "V");
+
+        // ACV offset 42
+        Inv_Data[which].acv[1] = extractValue(84, 4, 1, 0, s_d) / 10.0 ;
+        consoleOut( "extracted ACV1 = " + String(Inv_Data[which].acv[1]) + "V");
+
+        // ACV offset 44
+        Inv_Data[which].acv[2] = extractValue(88, 4, 1, 0, s_d) / 10.0 ;
+        consoleOut( "extracted ACV2 = " + String(Inv_Data[which].acv[2]) + "V");
+        
+        // FREQ offset 50
+        Inv_Data[which].freq = extractValue(100, 4, 1, 0, s_d)/100.0;
+        consoleOut( "extracted FREQ = " + String(Inv_Data[which].freq) + "Hz");
+        
+        // HEATH offset 48        
+        Inv_Data[which].heath = extractValue(96, 4, 1, 0, s_d)/100.0; 
+        consoleOut( "extracted HEATH = " + String(Inv_Data[which].heath) + "degC");
+
+        // Time from Boot
+        float time = extractValue(164, 8, 1, 0, s_d);
+        consoleOut( "extracted Time = " + String(time) + "s");
+
+        // Some counter that acumulate from boot
+        float energy = extractValue(156, 8, 1, 0, s_d);
+        consoleOut( "extracted Counter = " + String(energy) );
+
+        char s[20];
+        strncpy(s,s_d+40,12);
+        yield();
+        s[12] = '\0';
+        consoleOut( "extracted Status = " + String(s) );
+
+        strncpy(s,s_d+76,4);
+        yield();
+        s[4] = '\0';
+        consoleOut( "extracted Value2 = " + String(s) );
+
+        strncpy(s,s_d+92,4);
+        yield();
+        s[4] = '\0';
+        consoleOut( "extracted Value3 = " + String(s) );
+
+        strncpy(s,s_d+140,8);
+        yield();
+        s[8] = '\0';
+        consoleOut( "extracted Value4 = " + String(s) );
+
+        strncpy(s,s_d+148,8);
+        yield();
+        s[8] = '\0';
+        consoleOut( "extracted Value5 = " + String(s) );
+
+        strncpy(s,s_d+202,4);
+        yield();
+        s[4] = '\0';
+        consoleOut( "extracted Value8 = " + String(s) );
+        
+                // ******************  dc voltage   *****************************************
+         //voltage ch1 offset 26
+         Inv_Data[which].dcv[0] = extractValue( 52, 4, 1, 0, s_d ) * (float)1 / (float)26.3;
+         Inv_Data[which].dcv[1] = Inv_Data[which].dcv[0];
+         // voltage ch2 offset 28
+         Inv_Data[which].dcv[2] = extractValue( 56, 4, 1, 0, s_d ) * (float)1 / (float)26.3;
+         Inv_Data[which].dcv[3] = Inv_Data[which].dcv[2];
+         // ******************  current   *****************************************
+         //current ch1 offset 30
+         Inv_Data[which].dcc[0] =  extractValue(60, 4, 1, 0, s_d ) / 89.0;
+         // current ch2 offset 32
+         Inv_Data[which].dcc[1] =  extractValue(64, 4, 1, 0, s_d ) / 89.0;
+         //current ch3 offset 34
+         Inv_Data[which].dcc[2] =  extractValue(68, 4, 1, 0, s_d ) / 89.0;
+         // current ch4 offset 36
+         Inv_Data[which].dcc[3] =  extractValue(72, 4, 1, 0, s_d ) / 89.0;
       } else {
          
-        //yc600 or QS1 or QT2
+        //yc600 or QS1
         //frequency ac voltage and temperature
-        Inv_Data[which].acv = extractValue(56, 4, 1, 0, s_d) * ((float)1 / (float)1.3277) / 4 ;
+        Inv_Data[which].acv[0] = extractValue(56, 4, 1, 0, s_d) * ((float)1 / (float)1.3277) / 4 ;
         
         //frquency offset 48        
         Inv_Data[which].freq = 50000000 / extractValue(24, 6, 1, 0, s_d) ;
@@ -164,9 +270,9 @@ int decodePollAnswer(int which)
 
 
         //********************************************************************************************
-        //                                     QS1 and QT2
+        //                                         QS1
         //********************************************************************************************
-        if(Inv_Prop[which].invType == 1 or Inv_Prop[which].invType == 3) //QS1 or QT2 inverter
+        if(Inv_Prop[which].invType == 1) //QS1 inverter
         {
           //offset 21 -> byte for voltage ch3
           Inv_Data[which].dcv[2] = (extractValue( 42, 2, (float)16, 0, s_d ) + extractValue(40, 1, 1, 0, s_d)) * (float)82.5 / (float)4096;
@@ -207,7 +313,7 @@ We keep stacking the increases so we have also en_inc_total
          t_extr = (int)extractValue(76, 4, 1, 0, s_d); // dataframe timestamp ds3
          break;
       case 3: //qt2
-         t_extr = extractValue(60, 4, 1, 0, s_d); // dataframe timestamp
+         t_extr = (int)extractValue(164, 8, 1, 0, s_d); // dataframe timestamp qt2
          break;
     }
     
@@ -230,7 +336,7 @@ We keep stacking the increases so we have also en_inc_total
     int increment = 10; // offset to the next energy value
     int btc = 6; // amount of bytes
     int offst = 74; // this is incremented with 10
-    if(Inv_Prop[which].invType == 2) { offst = 100; increment = 8; btc = 8; } // for the DS3 we have different offset/increment
+    if(Inv_Prop[which].invType == 2 || Inv_Prop[which].invType == 3) { offst = 100; increment = 8; btc = 8; } // for the DS3 and QT2 we have different offset/increment
     
     //float total = 0;
     float en_extr = 0;
@@ -256,7 +362,7 @@ We keep stacking the increases so we have also en_inc_total
             en_extr = extractValue(offst+x*increment, btc, 1, 0, s_d); // offset 74 todays module energy channel 0
 
             //we calculate a new energy value for this panel and remember it
-            if ( Inv_Prop[which].invType == 2) {
+            if ( Inv_Prop[which].invType == 2 || Inv_Prop[which].invType == 3) {
               en_saved[which][x] = (en_extr / (float)1000 /100) * 1.66; //[Wh]
             } else {
               en_saved[which][x] = (en_extr * 8.311F / (float)3600); //[Wh]
@@ -278,12 +384,11 @@ We keep stacking the increases so we have also en_inc_total
             //Inv_Data[which].en_total += en_incr; // stack the increase
             
             //calculate the power for this panel and remember
-            power = en_incr / ts * (float)3600; //[W]
-//            if ( Inv_Prop[which].invType == 2) {
-//              power = en_incr / ts * (float)3600; //[W]
-//            } else {
-//              power = en_incr / ts * (float)3600; //[W]
-//            }
+            if(Inv_Prop[which].invType == 3) //QT2
+              power = Inv_Data[which].dcv[x]*Inv_Data[which].dcc[x]; //[W]
+            else 
+              power = en_incr / ts * (float)3600; //[W]
+
             Inv_Data[which].power[x] = round1(power);
             total_pwr += power;
             
@@ -361,9 +466,9 @@ if(Mqtt_Format == 0) return;
        break;  
        
    case 3:
-       snprintf(toMQTT, sizeof(toMQTT), "{\"invnr\":\"%d\",\"freq\":%.1f,\"temp\":%.1f,\"acv\":%.1f,\"signal\":%.1f,\"polled\":%d" , which, Inv_Data[which].freq, Inv_Data[which].heath, Inv_Data[which].acv, Inv_Data[which].sigQ, polled[which]);
+       snprintf(toMQTT, sizeof(toMQTT), "{\"invnr\":\"%d\",\"freq\":%.1f,\"temp\":%.1f,\"acv\":%.1f,\"signal\":%.1f,\"polled\":%d" , which, Inv_Data[which].freq, Inv_Data[which].heath, Inv_Data[which].acv[0], Inv_Data[which].sigQ, polled[which]);
        //char pan[50]={0};
-       if( Inv_Prop[which].invType == 1 or Inv_Prop[which].invType == 3) { // qs1 or qt2
+       if( Inv_Prop[which].invType == 1) { // qs1
            sprintf(pan, ",\"dcv\":[%.1f,%.1f,%.1f,%.1f]", Inv_Data[which].dcv[0], Inv_Data[which].dcv[1],Inv_Data[which].dcv[2],Inv_Data[which].dcv[3]);
            strcat(toMQTT, pan);
            sprintf(pan, ",\"dcc\":[%.1f,%.1f,%.1f,%.1f]", Inv_Data[which].dcc[0], Inv_Data[which].dcc[1],Inv_Data[which].dcc[2],Inv_Data[which].dcc[3]);
@@ -393,13 +498,13 @@ if(Mqtt_Format == 0) return;
        reTain=true;
        break;
     case 4:
-        snprintf(toMQTT, sizeof(toMQTT), "{\"inv_serial\":\"%s\",\"freq\":%.1f,\"temp\":%.1f,\"acv\":%.1f" , Inv_Prop[which].invSerial, Inv_Data[which].freq, Inv_Data[which].heath, Inv_Data[which].acv);      
+        snprintf(toMQTT, sizeof(toMQTT), "{\"inv_serial\":\"%s\",\"freq\":%.1f,\"temp\":%.1f,\"acv\":%.1f" , Inv_Prop[which].invSerial, Inv_Data[which].freq, Inv_Data[which].heath, Inv_Data[which].acv[0]);      
         sprintf(pan, ",\"ch0\":[%.1f,%.1f,%.1f,%.2f]", Inv_Data[which].dcv[0], Inv_Data[which].dcc[0], Inv_Data[which].power[0], en_saved[which][0]);  
         strcat(toMQTT, pan);
         sprintf(pan, ",\"ch1\":[%.1f,%.1f,%.1f,%.2f]", Inv_Data[which].dcv[1], Inv_Data[which].dcc[1], Inv_Data[which].power[1], en_saved[which][1]);  
         strcat(toMQTT, pan);
 
-        if( Inv_Prop[which].invType == 1 or Inv_Prop[which].invType == 3) { // add ch2 and ch3
+        if( Inv_Prop[which].invType == 1 || Inv_Prop[which].invType == 3) { // add ch2 and ch3
             sprintf(pan, ",\"ch2\":[%.1f,%.1f,%.1f,%.2f]", Inv_Data[which].dcv[2], Inv_Data[which].dcc[2], Inv_Data[which].power[2], en_saved[which][2]);  
             strcat(toMQTT, pan);
             sprintf(pan, ",\"ch3\":[%.1f,%.1f,%.1f,%.2f]", Inv_Data[which].dcv[3], Inv_Data[which].dcc[3], Inv_Data[which].power[3], en_saved[which][3]);  

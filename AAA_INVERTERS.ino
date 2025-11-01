@@ -160,8 +160,8 @@ void handleInverterconfig(AsyncWebServerRequest *request)
 
    Inv_Prop[iKeuze].conPanels[2] = false;
    Inv_Prop[iKeuze].conPanels[3] = false;
-   //we only collect this when type = 1 or 3
-   if(Inv_Prop[iKeuze].invType == 1 || Inv_Prop[iKeuze].invType == 3) {
+   //we only collect this when type = 1
+   if(Inv_Prop[iKeuze].invType == 1 || Inv_Prop[iKeuze].invType == 3 ) {
     if(request->hasParam("pan3")) { Inv_Prop[iKeuze].conPanels[2] = true;}    
     if(request->hasParam("pan4")) { Inv_Prop[iKeuze].conPanels[3] = true;}    
    }
@@ -386,23 +386,21 @@ void inverterForm() {
         if (Inv_Prop[iKeuze].conPanels[0]) { toSend.replace("#1check", "checked");}
         if (Inv_Prop[iKeuze].conPanels[1]) { toSend.replace("#2check", "checked");}
                 
-        if(Inv_Prop[iKeuze].invType == 0 || Inv_Prop[iKeuze].invType == 2 ) { // when the type = yc600 (0) or ds3 (2)
+        if(Inv_Prop[iKeuze].invType == 0 || Inv_Prop[iKeuze].invType == 2) { // when the type = yc600 (0) or ds3 (2)
               
             toSend.replace("onload='showFunction()", "onload='hideFunction()" );
             if(Inv_Prop[iKeuze].invType == 0) 
             { 
               toSend.replace("invtype_0", "selected");
+            } else if(Inv_Prop[iKeuze].invType == 2) {
+              toSend.replace("invtype_2", "selected");
             } else {
-             toSend.replace("invtype_2", "selected");  
+             toSend.replace("invtype_3", "selected");  
            }
         } else { // inv type == 1 or 3
           
           //Serial.println(" inverter type = 1");
-          if(Inv_Prop[iKeuze].invType == 1){
-            toSend.replace("invtype_1", "selected");
-          } else {
-            toSend.replace("invtype_3", "selected");
-          }
+          toSend.replace("invtype_1", "selected");
            if (Inv_Prop[iKeuze].conPanels[2]) { toSend.replace("#3check", "checked");}
            if (Inv_Prop[iKeuze].conPanels[3]) { toSend.replace("#4check", "checked");}
         }

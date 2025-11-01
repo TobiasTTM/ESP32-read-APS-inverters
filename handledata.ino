@@ -76,7 +76,7 @@ void handleDataRequests(AsyncWebServerRequest *request)
       root["sid"] = Inv_Prop[i].invID;
       root["freq"] = round1(Inv_Data[i].freq);
       root["temp"] = round1(Inv_Data[i].heath);
-      root["acv"] = round1(Inv_Data[i].acv);
+      root["acv"] = round1(Inv_Data[i].acv[0]);
       root["sq"] = round1(Inv_Data[i].sigQ);     
       root["pw_total"] = round1(Inv_Data[i].pw_total);
       root["en_total"] = round2(Inv_Data[i].en_total/(float)1000); // rounded

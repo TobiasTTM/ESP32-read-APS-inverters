@@ -3,7 +3,7 @@ int setMaxPower(int which)
 // if there is no coordinator, this command fails
 // this function tries to program a throttle value in the inverter
 // the value is in desiredThrottle[Inv]
-// after that the inverter is queried ti determine the programmed value
+// after that the inverter is queried it determine the programmed value
 // when the query succeeds this value is always written in preferences
 
 int calibratedVal;
@@ -20,9 +20,9 @@ ECU_REVERSE().toCharArray(ecu_id_reverse, 13);
 calibratedVal = desiredThrottle[which] + Inv_Prop[which].calib;
 consoleOut ("user input calibrated = " + String(calibratedVal)); 
 
-if(Inv_Prop[which].invType == 2)  // DS3
+if(Inv_Prop[which].invType == 2 || Inv_Prop[which].invType == 3)  // DS3 or QT2
 {
-      consoleOut("sending the throttle command for DS3");
+      consoleOut("sending the throttle command for DS3 / QT2");
       // first we convert the scaled maxPower value to hex, ( msb and lsb )
       // and calculate the validation byte
       Scaled = (calibratedVal * 1659 + 50) / 100; // this rounds up instead of down
