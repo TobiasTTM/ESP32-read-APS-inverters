@@ -18,7 +18,7 @@ void start_wifi() {
   while (WiFi.status() != WL_CONNECTED) {
      delay(500);
      Serial.print("*");
-     WiFi.begin();
+     WiFi.begin(); 
      event+=1;
      if (event==10) {break;}
   }

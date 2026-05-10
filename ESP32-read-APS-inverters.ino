@@ -343,7 +343,7 @@ void loop() {
 #ifdef TEST
 // always daytime to be able to test
  dayTime = true;
-#else
+#endif
  
    if(now() > switchonTime && now() < switchoffTime) 
     {
@@ -375,7 +375,7 @@ void loop() {
             
          }
     }
-#endif
+
 // ******************************************************************
 //              polling every 300 seconds
 // ******************************************************************

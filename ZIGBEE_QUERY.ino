@@ -102,7 +102,7 @@ int decodeQueryAnswer(int welke, bool throTTle)
     // **************************************************************
     //                          DECODING YC600  / QS1
     //***************************************************************
-    if(Inv_Prop[welke].invType != 2) 
+    if(Inv_Prop[welke].invType == 0 || Inv_Prop[welke].invType == 1) 
     {
         consoleOut("decoding a YC600 / QS1 ");
         // we know the tail is
@@ -148,9 +148,9 @@ int decodeQueryAnswer(int welke, bool throTTle)
         } 
     }  else {// end if(invType != 2)
     // *******************************************************************************
-    //                          DECODING DS3
+    //                          DECODING DS3/QT2
     // ***************************************************************
-    consoleOut("decoding a DS3 ");
+    consoleOut("decoding a DS3 or QT2 ");
     //the payload looks like FBFB5CDDDE010426E20013BA14B413EC000A032000500003DD03A403200003E80000000000640003DD03A503350304012C060D03FF045F0E93140E3204890258001374136F125C0014032007D023A6031401BF03D9FFFFFFFFFFFF23A6C8FF1C01FEFEA2F6734E  
     // for test we give payload a conten
     //strcpy(payload, "FBFB5CDDDE0104 26E2  0013BA14B413EC000A032000500003DD03A403200003E80000000000640003DD03A503350304012C060D03FF045F0E93140E3204890258001374136F125C0014032007D023A6031401BF03D9FFFFFFFFFFFF23A6C8FF1C01FEFEA2F6734E");
