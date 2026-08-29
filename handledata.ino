@@ -122,6 +122,7 @@ void handleDataRequests(AsyncWebServerRequest *request)
       root["lifetime_wh"] = energyLifetimeWhFor(i);
       root["freq"] = round1(Inv_Data[i].freq);
       root["temp"] = round1(Inv_Data[i].heath);
+      root["acv"] = round1(Inv_Data[i].acv[0]);
       root["acv0"] = round1(Inv_Data[i].acv[0]);
       root["acv1"] = round1(Inv_Data[i].acv[1]);
       root["acv2"] = round1(Inv_Data[i].acv[2]);

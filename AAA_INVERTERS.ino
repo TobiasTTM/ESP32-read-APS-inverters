@@ -195,7 +195,7 @@ String processor(const String& var)
   if(var == "LOADBAG") 
   {
     consoleOut(F("found LOADBAG"));
-    if(Inv_Prop[iKeuze].invType == 1) 
+    if(Inv_Prop[iKeuze].invType == 1 || Inv_Prop[iKeuze].invType == 3) 
       {
       return F("showFunction()"); 
       } else {
